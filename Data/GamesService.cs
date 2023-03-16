@@ -7,7 +7,7 @@ namespace CBB_Elo_Ratings.Data
 	public class GamesService
 	{
 		private static string Endpoint = @"https://api.sportsdata.io/v3/cbb/scores/json/";
-		private static string AccessKey = "?key=689ca253c1644852865236e7a867601d";
+		private static string AccessKey = "";
 		private static HttpClient ApiClient { get; set; }
 
 		static GamesService()
