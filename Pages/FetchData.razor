@@ -1,0 +1,48 @@
+﻿@page "/fetchdata"
+
+@using CBB_Elo_Ratings.Data
+
+<h1>Games</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (games == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Home Team Score</th>
+                <th>Away Team Score</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Data.Models.Game game in games)
+            {
+                <tr>
+                    <td>@game.HomeTeam</td>
+                    <td>@game.AwayTeam</td>
+                    <td>@game.HomeTeamScore.ToString()</td>
+                    <td>@game.AwayTeamScore.ToString()</td>
+                    <td>@game.DateTime.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Data.Models.Game[] games;
+
+    protected override async Task OnInitializedAsync()
+    {
+        games = await Data.GamesService.GetGamesByDate(DateTime.Now);
+    }
+}
+
