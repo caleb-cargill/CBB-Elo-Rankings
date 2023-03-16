@@ -11,9 +11,9 @@ namespace CBB_Elo_Ratings.Data.Models
         public string State { get; set; }
         public object Zip { get; set; }
         public object Country { get; set; }
-        public int Capacity { get; set; }
-        public double GeoLat { get; set; }
-        public double GeoLong { get; set; }
+        public int? Capacity { get; set; }
+        public double? GeoLat { get; set; }
+        public double? GeoLong { get; set; }
     }
 }
 

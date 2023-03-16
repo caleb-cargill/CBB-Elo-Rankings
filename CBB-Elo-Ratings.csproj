@@ -59,8 +59,20 @@
 
     <ItemGroup>
       <None Remove="Data\Models\" />
+      <None Remove="Data\Common\" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Data\Models\" />
+      <Folder Include="Data\Common\" />
+    </ItemGroup>
+    <ItemGroup>
+      <RazorComponent Update="Teams.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </RazorComponent>
+      <RazorComponent Update="Pages\Teams.razor">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      </RazorComponent>
     </ItemGroup>
 </Project>

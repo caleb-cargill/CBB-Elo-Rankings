@@ -1,0 +1,46 @@
+﻿@page "/teams"
+
+@using CBB_Elo_Ratings.Data;
+
+<h1>Teams</h1>
+
+@if (teams == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>School</th>
+                <th>Wins</th>
+                <th>Losses</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Data.Models.Team team in teams)
+            {
+                <tr>
+                    <td>@team.Name</td>
+                    <td>@team.School</td>
+                    <td>@team.Wins?.ToString()</td>
+                    <td>@team.Losses?.ToString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    private Data.Models.Team[] teams;
+
+    protected override async Task OnInitializedAsync()
+    {
+        teams = await TeamsService.GetTeamsAsync();
+    }
+}
+

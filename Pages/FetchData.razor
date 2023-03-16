@@ -4,8 +4,6 @@
 
 <h1>Games</h1>
 
-<p>This component demonstrates fetching data from a service.</p>
-
 @if (games == null)
 {
     <p><em>Loading...</em></p>
@@ -30,19 +28,77 @@ else
                     <td>@game.AwayTeam</td>
                     <td>@game.HomeTeamScore.ToString()</td>
                     <td>@game.AwayTeamScore.ToString()</td>
-                    <td>@game.DateTime.ToShortDateString()</td>
+                    <td>@game.DateTime?.ToShortDateString()</td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
+<h1>Games By Date</h1>
+
+<InputDate @bind-Value="GameDate" DisplayName="Game Date"/>
+
+@if (gamesByDate == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Home Team Score</th>
+                <th>Away Team Score</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Data.Models.Game game in gamesByDate)
+            {
+                <tr>
+                    <td>@game.HomeTeam</td>
+                    <td>@game.AwayTeam</td>
+                    <td>@game.HomeTeamScore.ToString()</td>
+                    <td>@game.AwayTeamScore.ToString()</td>
+                    <td>@game.DateTime?.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
 @code {
+
     private Data.Models.Game[] games;
+
+    private Data.Models.Game[] gamesByDate;
+
+    private DateTime GameDate
+    {
+        get => _gameDate;
+        set
+        {
+            _gameDate = value;
+            UpdateGamesByDate();
+        }
+    }
+    private DateTime _gameDate = new DateTime(2023, 3, 15);
 
     protected override async Task OnInitializedAsync()
     {
-        games = await Data.GamesService.GetGamesByDate(DateTime.Now);
+        UpdateGamesByDate();
+        games = await Data.GamesService.GetTeamSchedule("2023", "CIN");
     }
+
+    private async void UpdateGamesByDate()
+    {
+        gamesByDate = await Data.GamesService.GetGamesByDate(GameDate);
+    }
+
 }
 

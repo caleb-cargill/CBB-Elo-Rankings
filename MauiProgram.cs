@@ -22,7 +22,9 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
+		builder.Services.AddSingleton<Data.DataContext>();
 		builder.Services.AddSingleton<Data.GamesService>();
+		builder.Services.AddSingleton<Data.TeamsService>();
 
 		return builder.Build();
 	}
