@@ -4,14 +4,14 @@ using System.Net.Http.Headers;
 
 namespace CBB_Elo_Ratings.Data
 {
-	public class DataContext
-	{
+    public class DataContext
+    {
         private static string Endpoint = @"https://api.sportsdata.io/v3/cbb/scores/json/";
-        private static string AccessKey = "";
+        private static string AccessKey = "?key=";
         public static HttpClient ApiClient { get; set; }
 
         static DataContext()
-		{
+        {
             if (ApiClient == null)
             {
                 ApiClient = new HttpClient();
@@ -22,7 +22,7 @@ namespace CBB_Elo_Ratings.Data
         }
 
         public static string SearchString(string args)
-            => args + AccessKey;
-	}
+            => args + DataContext.AccessKey;
+    }
 }
 
