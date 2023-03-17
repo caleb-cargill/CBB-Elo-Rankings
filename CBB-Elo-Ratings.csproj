@@ -70,9 +70,5 @@
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </RazorComponent>
-      <RazorComponent Update="Pages\Teams.razor">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </RazorComponent>
     </ItemGroup>
 </Project>
