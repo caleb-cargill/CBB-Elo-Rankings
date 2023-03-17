@@ -25,6 +25,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<Data.DataContext>();
 		builder.Services.AddSingleton<Data.GamesService>();
 		builder.Services.AddSingleton<Data.TeamsService>();
+		builder.Services.AddSingleton<Data.PlayerService>();
 
 		return builder.Build();
 	}

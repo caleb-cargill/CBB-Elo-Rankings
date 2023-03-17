@@ -1,0 +1,52 @@
+﻿@page "/players"
+
+@using CBB_Elo_Ratings.Data;
+
+<h1>@($"{SelectedSchool} Players")</h1>
+
+@if (players == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Jersey</th>
+                <th>Position</th>
+                <th>Height</th>
+                <th>Weight</th>
+                <th>Injury Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Data.Models.Player player in players)
+            {
+                <tr>
+                    <td>@($"{player.FirstName} {player.LastName}")</td>
+                    <td>@player.Jersey.ToString()</td>
+                    <td>@player.Position</td>
+                    <td>@player.Height.ToString()</td>
+                    <td>@player.Weight.ToString()</td>
+                    <td>@player.InjuryStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    private string SelectedSchool = "CIN";
+
+    private Data.Models.Player[] players;
+
+    protected override async Task OnInitializedAsync()
+    {
+        players = await PlayerService.GetPlayersByTeam(SelectedSchool);
+    }
+}
+
